@@ -61,21 +61,19 @@ class ChatRegex:
             investigatorTwo = r'\b(?:Dr\.)?\s?(?:John\s)?Watson\b'
             crime = r'\b(?:kill|killed|killing|manslaughter|assassination|execution|annihilation|liquidation|slaughter|butchery|termination|carnage|death|demise|extermination|murder)\b'
             perpetrator = r'\b(?:(John |Mr. )?Stapleton|Rodger( Baskerville)?)\b'
-            suspect1 = r'\b(?:Dr\.)?\s?(?:James\s)?Mortimer\b'
-            suspect2 = 'Beryl Stapleton'
-            suspect3 = 'Henry Baskerville'
-            suspect4 = 'Mr. Barrymore'
-            suspect5 = 'Mrs. Barrymore'
             suspectRegex = r'\b(?:Dr\.\sJames\sMortimer|Jack\sStapleton|Beryl\sStapleton|Frankland|Mr\.\sBarrymore|Mrs\.\sBarrymore|Mr\.\sLaura\sLyons|Mrs\.\sLaura\sLyons|Selden)\b'
         elif novel_selection == '2':
-            investigator = r'\b(?:(the )?Young Adventurers(, Ltd.)?|(Mr.)?(Tommy|Thomas)( Beresford)?|(Miss )?Prudence( Cowley)?|(Miss )?Tuppence)\b'
+            investigatorOne = r'\b(?:(Mr.)?(Tommy|Thomas)( Beresford)?)\b'
+            investigatorTwo = r'\b(?:(Miss )?Prudence( Cowley)?|(Miss )?Tuppence)\b'
+            #(the )?Young Adventurers(, Ltd.)?|
             crime = r'\b(?:Labour Unrest|Revolution(s)?|(Labour )?coup?)\b'
             perpetrator = r'\b(?:(Mr. )?Brown|(Sir )?James( Peel Edgerton)?)\b'
             suspect1 = r'\b(?:(Mr. )?((Edward )?Whittington))\b'
             suspect2 = r'\b(?:(Mr. )?(Julius P. |Julius )?Hersheimmer)\b'
             suspect3 = r'\b(?:Jane( Finn)?)\b'
         elif novel_selection == '3':
-            investigator = r'\b(?:(Monsieur |Hercule )?Poirot)\b'
+            investigatorOne = r'\b(?:(Monsieur |Hercule )?Poirot)\b'
+            investigatorTwo = "FALSE"
             crime = r'\b(?:(strychnine )?(poisoned|poisoning)?|(Wilful )?Murder(ing|ed)?|Killed)\b'
             perpetrator = r'\b(?:Mr. Alfred Inglethorp|Alfred Inglethorp|Alfred|Mr. Inglethorp|Miss Howard|Evelyn( Howard)?)\b'
             suspect1 = r'\b(?:(Mr.( John)?|John|(Mrs. )?Lawrence) Cavendish|Cavendishes)\b'
@@ -125,23 +123,26 @@ class ChatRegex:
         #print(self.bookStore['selected_novel']) #Get text
         return 
     
-    def investigatorDetect(self, investigatorOne, investigatorTwo):
+    def investigatorDetect(self, investigatorOne, investigatorTwo="FALSE"):
+        count = 0
         for chapter in self.chapters:
-            # print(chapter['chapterContent'])
-            # print(str(chapter['chapterContent']))
             content = str(chapter['chapterContent'])
             match = re.search(investigatorOne, content)
             if match:
                 matches = re.finditer(investigatorOne, content)
-                print(matches)
                 for match in matches:
-                    print("#################################################")
-                    # matched_text = match.group()
-                    # print(match.start())
-                    # print(match.end())
-                    # print(content[match.start():match.end()])
-                    # print("First Match:", matched_text)
-                # break
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
+                    punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
+                    num_punctuation = len(punctuation_matches)
+                    print(match.group(), "First mentioned in: ")
+                    print("Chapter-", count)
+                    print("Sentence-", num_punctuation + 1)
+                    if(investigatorTwo != "FALSE"):
+                        self.investigatorDetect(investigatorTwo)
+                        return
+                    else:
+                        return
+            count+= 1
 
     def run(self, novel_selection):
         while self.processRun:
