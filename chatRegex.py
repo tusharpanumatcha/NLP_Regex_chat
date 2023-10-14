@@ -32,6 +32,7 @@ class ChatRegex:
             chapter_name = chapter_div.find('h2').text if chapter_div.find('h2') else None
             if chapter_name is not None and re.findall(pattern, chapter_name):
                 chapter_content = ' '.join([html.unescape(p.text.strip()) for p in chapter_div.find_all('p')]) if chapter_div.find_all('p') else None
+                chapter_name = chapter_name.replace("\n", "")
                 chapters.append({"chapterName": chapter_name, "chapterContent": chapter_content})
         # for i, chapter in range(chapters):
         #     print(chapter.chapterName)
@@ -47,13 +48,14 @@ class ChatRegex:
             sys.stdout.flush()
             time.sleep(0.1)
             sys.stdout.write('\b')
-        #List of chapters and contents as {"chapterName":"" , "chanpterContent": ""}
+        #List of chapters and contents as {"chapterName":"" , "chapterContent": ""}
         self.chapters = self.extractUrl(url)
-        for chapter in self.chapters:
-            print(f"Chapter Name: {chapter['chapterName']}")
+
+        #for chapter in self.chapters:
+        #    print(f"Chapter Name: {chapter['chapterName']}")
+        #    print(f"Chapter Content: {chapter['chapterContent']}")    
         
     def processQuery(self, query, novel_selection):
-        #Novel Information - Going to make regex expressions instead
         if novel_selection == '1':
             investigator = 'Sherlock Holmes'
             investigator2 = 'John Watson'
@@ -65,25 +67,19 @@ class ChatRegex:
             suspect4 = 'Mr. Barrymore'
             suspect5 = 'Mrs. Barrymore'
         elif novel_selection == '2':
-            investigatorr = r'\b(?:Young Adventurers|Tommy( Beresford)?|(Prudence )?Tuppence( Cowley)?)\b'
-            investigator = 'Tommy Beresford'
-            investigator2 = 'Prudence Tuppence Cowley'
-            crime = 'Revolution' #Labor unrest
+            investigator = r'\b(?:(the )?Young Adventurers(, Ltd.)?|(Mr.)?(Tommy|Thomas)( Beresford)?|(Miss )?Prudence( Cowley)?|(Miss )?Tuppence)\b'
+            crime = r'\b(?:Labour Unrest|Revolution(s)?|(Labour )?coup?)\b'
             perpetrator = r'\b(?:(Mr. )?Brown|(Sir )?James( Peel Edgerton)?)\b'
-            suspect1 = 'Mr. Whittington'
-            suspect2 = 'Julius Hersheimmer'
-            suspect3 = 'Jane Finn'
-            suspect4 = 'Mr. Brown'
+            suspect1 = r'\b(?:(Mr. )?((Edward )?Whittington))\b'
+            suspect2 = r'\b(?:(Mr. )?(Julius P. |Julius )?Hersheimmer)\b'
+            suspect3 = r'\b(?:Jane( Finn)?)\b'
         elif novel_selection == '3':
-            investigator = 'Hercule Poirot'
-            crime = 'Death' #'Murder', 'Killing'
+            investigator = r'\b(?:(Monsieur |Hercule )?Poirot)\b'
+            crime = r'\b(?:(strychnine )?(poisoned|poisoning)?|(Wilful )?Murder(ing|ed)?|Killed)\b'
             perpetrator = r'\b(?:Mr. Alfred Inglethorp|Alfred Inglethorp|Alfred|Mr. Inglethorp|Miss Howard|Evelyn( Howard)?)\b'
-            suspect1 = 'Lawrence Cavendish'
-            suspect2 = 'Cynthia Murdoch'
-            suspect3 = 'Dr. Bauerstein'
-            suspect4 = 'Evelyn Howard'
-
-        book_text = self.bookStore['selected_novel']
+            suspect1 = r'\b(?:(Mr.( John)?|John|(Mrs. )?Lawrence) Cavendish|Cavendishes)\b'
+            suspect2 = r'\b(?:(Miss|Evelyn) Howard|Evelyn)\b'
+            suspect3 = r'\b(?:Mrs. Raikes)\b'
 
         #Question Parsing
         q1 = r'^(?=.*\bwhen\b)(?=.*\b(investigator(s)?|pair|duo|partner(s)?|detective(s)?)\b)(?=.*\bfirst\b)(?=.*\b(mention(ed)?|appear(s)?|occur(s)?|show(s)? up|shown|introduce(d)?|arrive(s)?)\b)'
@@ -100,6 +96,14 @@ class ChatRegex:
         elif re.search(q3, query, re.IGNORECASE):
             print("When is the perpetrator first mentioned - chapter #, the sentence(s) # in a chapter")
         elif re.search(q4, query, re.IGNORECASE):
+            count = 0
+            for chapter in self.chapters:
+                if(count == 0):
+                    book_text = ""
+                else:
+                    book_text = book_text + " " + chapter['chapterContent']
+                count = count + 1
+
             matches = re.finditer(perpetrator, book_text)
             count = 0
             for match in matches:
