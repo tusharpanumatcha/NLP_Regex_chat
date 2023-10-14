@@ -1,3 +1,4 @@
+import html
 import sys
 import time
 import requests as req
@@ -9,6 +10,7 @@ class ChatRegex:
         self.processRun = True
         self.bookStore = {}
         self.onlyAlphabets = r'\b([A-Za-z]+)\b'
+        self.chapters = []
 
     def spinningCursor(self):
         while True:
@@ -16,9 +18,24 @@ class ChatRegex:
 
     def extractUrl(self, url):
         response = req.get(url)
-        title = response.text.split('<title>')[1].split('</title>')[0] 
-        text = bs(response.content, 'html.parser').get_text()
-        return title, text 
+        html_content = response.content
+        soup = bs(html_content, 'html.parser')
+
+        # Step 3: Identify HTML structure containing chapter names and content
+        # Assuming chapters are within <div class="chapter"> elements
+        chapter_divs = soup.find_all('div', class_='chapter')
+
+        # Step 4: Extract chapter names and content
+        chapters = []
+        pattern = r'(Chapter\s+[IVXLCDM\d]+\s*\.?\s*|\b[A-Za-z]+\b)'
+        for chapter_div in chapter_divs:
+            chapter_name = chapter_div.find('h2').text if chapter_div.find('h2') else None
+            if chapter_name is not None and re.findall(pattern, chapter_name):
+                chapter_content = ' '.join([html.unescape(p.text.strip()) for p in chapter_div.find_all('p')]) if chapter_div.find_all('p') else None
+                chapters.append({"chapterName": chapter_name, "chapterContent": chapter_content})
+        # for i, chapter in range(chapters):
+        #     print(chapter.chapterName)
+        return chapters
 
     def print_red(text):
         print(f"\033[91m{text}\033[0m")
@@ -30,10 +47,10 @@ class ChatRegex:
             sys.stdout.flush()
             time.sleep(0.1)
             sys.stdout.write('\b')
-        title, text = self.extractUrl(url)
-        title = title.replace("The Project Gutenberg eBook of ", "")
-        self.bookStore['selected_novel'] = text
-        print(title + " " +"Novel data loaded... \n")
+        #List of chapters and contents as {"chapterName":"" , "chanpterContent": ""}
+        self.chapters = self.extractUrl(url)
+        for chapter in self.chapters:
+            print(f"Chapter Name: {chapter['chapterName']}")
         
     def processQuery(self, query, novel_selection):
         #Novel Information - Going to make regex expressions instead
