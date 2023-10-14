@@ -57,15 +57,16 @@ class ChatRegex:
         
     def processQuery(self, query, novel_selection):
         if novel_selection == '1':
-            investigator = 'Sherlock Holmes'
-            investigator2 = 'John Watson'
-            crime = 'Death' #'Murder', 'Killing'
+            investigatorOne = r'\b(?:Mr\.)?\s?(?:Sherlock\s)?Holmes\b'
+            investigatorTwo = r'\b(?:Dr\.)?\s?(?:John\s)?Watson\b'
+            crime = r'\b(?:kill|killed|killing|manslaughter|assassination|execution|annihilation|liquidation|slaughter|butchery|termination|carnage|death|demise|extermination|murder)\b'
             perpetrator = r'\b(?:(John |Mr. )?Stapleton|Rodger( Baskerville)?)\b'
-            suspect1 = 'James Mortimer'
+            suspect1 = r'\b(?:Dr\.)?\s?(?:James\s)?Mortimer\b'
             suspect2 = 'Beryl Stapleton'
             suspect3 = 'Henry Baskerville'
             suspect4 = 'Mr. Barrymore'
             suspect5 = 'Mrs. Barrymore'
+            suspectRegex = r'\b(?:Dr\.\sJames\sMortimer|Jack\sStapleton|Beryl\sStapleton|Frankland|Mr\.\sBarrymore|Mrs\.\sBarrymore|Mr\.\sLaura\sLyons|Mrs\.\sLaura\sLyons|Selden)\b'
         elif novel_selection == '2':
             investigator = r'\b(?:(the )?Young Adventurers(, Ltd.)?|(Mr.)?(Tommy|Thomas)( Beresford)?|(Miss )?Prudence( Cowley)?|(Miss )?Tuppence)\b'
             crime = r'\b(?:Labour Unrest|Revolution(s)?|(Labour )?coup?)\b'
@@ -91,6 +92,7 @@ class ChatRegex:
 
         if re.search(q1, query, re.IGNORECASE):
             print("When does the investigator (or a pair) occur for the first time -  chapter #, the sentence(s) # in a chapter")
+            self.investigatorDetect(investigatorOne, investigatorTwo)
         elif re.search(q2, query, re.IGNORECASE):
             print("When is the crime first mentioned - the type of the crime and the details -  chapter #, the sentence(s) # in a chapter")
         elif re.search(q3, query, re.IGNORECASE):
@@ -123,6 +125,24 @@ class ChatRegex:
         #print(self.bookStore['selected_novel']) #Get text
         return 
     
+    def investigatorDetect(self, investigatorOne, investigatorTwo):
+        for chapter in self.chapters:
+            # print(chapter['chapterContent'])
+            # print(str(chapter['chapterContent']))
+            content = str(chapter['chapterContent'])
+            match = re.search(investigatorOne, content)
+            if match:
+                matches = re.finditer(investigatorOne, content)
+                print(matches)
+                for match in matches:
+                    print("#################################################")
+                    # matched_text = match.group()
+                    # print(match.start())
+                    # print(match.end())
+                    # print(content[match.start():match.end()])
+                    # print("First Match:", matched_text)
+                # break
+
     def run(self, novel_selection):
         while self.processRun:
             print("Type 'exit' or 'quit' to terminate\n")
