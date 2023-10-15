@@ -203,16 +203,28 @@ class ChatRegex:
             investigatorTwo = r'\b(?:Dr\.)?\s?(?:John\s)?Watson\b'
             crime = r'\b(?:kill|killed|killing|manslaughter|assassination|execution|annihilation|liquidation|slaughter|butchery|termination|carnage|death|demise|extermination|murder)\b'
             perpetrator = r'\b(?:(John |Mr. )?Stapleton|Rodger( Baskerville)?)\b'
-            suspectRegex = r'\b(?:Dr\.\sJames\sMortimer|Jack\sStapleton|Beryl\sStapleton|Frankland|Mr\.\sBarrymore|Mrs\.\sBarrymore|Mr\.\sLaura\sLyons|Mrs\.\sLaura\sLyons|Selden)\b'
+            suspectRegexArray = [
+                r'\bDr\.\sJames\sMortimer\b',
+                r'\bJack\sStapleton\b',
+                r'\bBeryl\sStapleton\b',
+                r'\bFrankland\b',
+                r'\bMr\.\sBarrymore\b',
+                r'\bMrs\.\sBarrymore\b',
+                r'\bMr\.\sLaura\sLyons\b',
+                r'\bMrs\.\sLaura\sLyons\b',
+                r'\bSelden\b'
+            ]
         elif novel_selection == '2':
             investigatorOne = r'\b(?:(Mr.)?(Tommy|Thomas)( Beresford)?)\b'
             investigatorTwo = r'\b(?:(Miss )?Prudence( Cowley)?|(Miss )?Tuppence)\b'
             #(the )?Young Adventurers(, Ltd.)?|
             crime = r'\b(?:Labour Unrest|Revolution(s)?|(Labour )?coup?)\b'
-            perpetrator = r'\b(?:(Mr. )?Brown|Sir James( Peel Edgerton)?)\b'
-            suspect1 = r'\b(?:(Mr. )?((Edward )?Whittington))\b'
-            suspect2 = r'\b(?:(Mr. )?(Julius P. |Julius )?Hersheimmer)\b'
-            suspect3 = r'\b(?:Jane( Finn)?)\b'
+            perpetrator = r'\b(?:(Mr. )?Brown|(Sir )?James( Peel Edgerton)?)\b'
+            suspectRegexArray = [
+                r'\b(?:(Mr. )?((Edward )?Whittington))\b',
+                r'\b(?:(Mr. )?(Julius P. |Julius )?Hersheimmer)\b',
+                r'\b(?:Jane( Finn)?)\b'
+            ]
         elif novel_selection == '3':
             investigatorOne = r'\b(?:(Monsieur |Hercule )?Poirot)\b'
             investigatorTwo = "FALSE"
@@ -250,11 +262,30 @@ class ChatRegex:
             #    self.togetherDetect(investigatorTwo, perpetrator, novel_selection)
         elif re.search(q6, query, re.IGNORECASE):
             print("When are other suspects first introduced - chapter #, the sentence(s) # in a chapter")
+            self.suspectDetect(suspectRegexArray, novel_selection)
         else:
             print("I am unable to answer that question")
 
         return 
     
+    def suspectDetect(self, suspectRegexArray, novel_selection):
+        for suspect in suspectRegexArray:
+            count = 0
+            for chapter in self.chapters:
+                content = str(chapter['chapterContent'])
+                match = re.search(suspect, content)
+                if match:
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
+                    punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
+                    num_punctuation = len(punctuation_matches)
+                    print(f"{match.group()} First mentioned in:")
+                    print(f"Chapter - {chapter['chapterName'].strip()}")
+                    print(f"Sentence - {num_punctuation + 1}")
+                    break
+                count += 1
+
+
+            
     def investigatorDetect(self, investigator, novel_selection):
         for chapter in self.chapters:
             content = str(chapter['chapterContent'])
