@@ -169,7 +169,23 @@ class ChatRegex:
                     return
             count+= 1
 
-        
+    def crimeDetect(self, crime):
+        count = 0
+        for chapter in self.chapters:
+            content = str(chapter['chapterContent'])
+            match = re.search(crime, content)
+            if match:
+                matches = re.finditer(crime, content)
+                for match in matches:
+                    punctuation_pattern = r'( |\n|\”|\"|$)'
+                    punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
+                    num_punctuation = len(punctuation_matches)
+                    print(match.group(), "First mentioned in: ")
+                    print("Chapter-", count)
+                    print("Sentence-", num_punctuation + 1)
+                    return
+            count+= 1
+
     def run(self, novel_selection):
         while self.processRun:
             print("Type 'exit' or 'quit' to terminate\n")
