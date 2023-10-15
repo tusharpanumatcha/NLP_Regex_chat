@@ -199,7 +199,6 @@ class ChatRegex:
     def processQuery(self, query, novel_selection):
         if novel_selection == '1':
             investigatorOne = r'\b(?:((Mr. )?Sherlock Holmes|(Mr. )?Sherlock|(Mr. )?Holmes))\b'
-            #investigatorOne = r'\b(?:Mr. )?(?:Sherlock\s)?Holmes\b'
             investigatorTwo = r'\b(?:Dr\.)?\s?(?:John\s)?Watson\b'
             crime = r'\b(?:kill|killed|killing|manslaughter|assassination|execution|annihilation|liquidation|slaughter|butchery|termination|carnage|death|demise|extermination|murder)\b'
             perpetrator = r'\b(?:(John |Mr. )?Stapleton|Rodger( Baskerville)?)\b'
@@ -261,30 +260,12 @@ class ChatRegex:
             #if investigatorTwo != "FALSE":
             #    self.togetherDetect(investigatorTwo, perpetrator, novel_selection)
         elif re.search(q6, query, re.IGNORECASE):
-            print("When are other suspects first introduced - chapter #, the sentence(s) # in a chapter")
+            #print("When are other suspects first introduced - chapter #, the sentence(s) # in a chapter")
             self.suspectDetect(suspectRegexArray, novel_selection)
         else:
             print("I am unable to answer that question")
 
         return 
-    
-    def suspectDetect(self, suspectRegexArray, novel_selection):
-        for suspect in suspectRegexArray:
-            count = 0
-            for chapter in self.chapters:
-                content = str(chapter['chapterContent'])
-                match = re.search(suspect, content)
-                if match:
-                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
-                    punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
-                    num_punctuation = len(punctuation_matches)
-                    print(f"{match.group()} First mentioned in:")
-                    print(f"Chapter - {chapter['chapterName'].strip()}")
-                    print(f"Sentence - {num_punctuation + 1}")
-                    break
-                count += 1
-
-
             
     def investigatorDetect(self, investigator, novel_selection):
         for chapter in self.chapters:
@@ -405,6 +386,20 @@ class ChatRegex:
                         #print("End of Perp")
                     perpetrator_matches = re.finditer(perpetrator, content)
                     #print("End of Inv")
+
+    def suspectDetect(self, suspectRegexArray, novel_selection):
+        for suspect in suspectRegexArray:
+            for chapter in self.chapters:
+                content = str(chapter['chapterContent'])
+                match = re.search(suspect, content)
+                if match:
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
+                    punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
+                    num_punctuation = len(punctuation_matches)
+                    print(f"{match.group()} First mentioned in:")
+                    print(f"Chapter - {chapter['chapterName'].strip()}")
+                    print(f"Sentence - {num_punctuation + 1}")
+                    break
 
     def run(self, novel_selection):
         while self.processRun:
