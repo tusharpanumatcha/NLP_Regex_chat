@@ -16,6 +16,12 @@ class ChatRegex:
         while True:
             for cursor in '|/-\\': yield cursor
 
+    def typeEffect(self, text):
+        for char in text:
+            print(char, end='', flush=True)
+            time.sleep(0.05) 
+        print()
+
     def extractUrl(self, url):
         response = req.get(url)
         html_content = response.content
@@ -93,8 +99,10 @@ class ChatRegex:
             self.investigatorDetect(investigatorOne, investigatorTwo)
         elif re.search(q2, query, re.IGNORECASE):
             print("When is the crime first mentioned - the type of the crime and the details -  chapter #, the sentence(s) # in a chapter")
+            self.crimeDetect(crime)
         elif re.search(q3, query, re.IGNORECASE):
             print("When is the perpetrator first mentioned - chapter #, the sentence(s) # in a chapter")
+            self.perpetratorDetect(perpetrator)
         elif re.search(q4, query, re.IGNORECASE):
             count = 0
             for chapter in self.chapters:
@@ -144,6 +152,24 @@ class ChatRegex:
                         return
             count+= 1
 
+    def perpetratorDetect(self, perpetrator):
+        count = 0
+        for chapter in self.chapters:
+            content = str(chapter['chapterContent'])
+            match = re.search(perpetrator, content)
+            if match:
+                matches = re.finditer(perpetrator, content)
+                for match in matches:
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
+                    punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
+                    num_punctuation = len(punctuation_matches)
+                    print(match.group(), "First mentioned in: ")
+                    print("Chapter-", count)
+                    print("Sentence-", num_punctuation + 1)
+                    return
+            count+= 1
+
+        
     def run(self, novel_selection):
         while self.processRun:
             print("Type 'exit' or 'quit' to terminate\n")
