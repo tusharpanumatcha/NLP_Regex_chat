@@ -19,68 +19,68 @@ class ChatRegex:
         }
         self.detectiveAnswerTemplates = [
             {
-                "template": "In the novel [Novel Title], the investigator [Investigator Name] first appears in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "In the novel [Novel Title], the investigator [Investigator Name] first appears in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Investigator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "You first encounter the investigator [Investigator Name] in Chapter [Chapter Number], sentence number [Sentence Number].\n",
+                "template": "You first encounter the investigator [Investigator Name] in [Chapter Number], sentence number [Sentence Number].\n",
                 "variables": ["Novel Title", "Investigator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The investigator [Investigator Name] makes their initial appearance in Chapter [Chapter Number], specifically in sentence [Sentence Number].\n",
+                "template": "The investigator [Investigator Name] makes their initial appearance in [Chapter Number], specifically in sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Investigator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "In [Novel Title], the investigator [Investigator Name] is introduced for the first time in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "In [Novel Title], the investigator [Investigator Name] is introduced for the first time in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Investigator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The first appearance of the investigator [Investigator Name] takes place in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "The first appearance of the investigator [Investigator Name] takes place in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Investigator Name", "Chapter Number", "Sentence Number"]
             }
         ]
         self.crimeAnswerTemplates = [
             {
-                "template": "The first mention of the crime in [Novel Title] occurs in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "The first mention of the crime in [Novel Title] occurs in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "In Chapter [Chapter Number] of [Novel Title], the crime is first mentioned in sentence [Sentence Number].\n",
+                "template": "In [Chapter Number] of [Novel Title], the crime is first mentioned in sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The crime is initially introduced in Chapter [Chapter Number] of [Novel Title], specifically in sentence [Sentence Number].\n",
+                "template": "The crime is initially introduced in [Chapter Number] of [Novel Title], specifically in sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "You first learn about the crime in [Novel Title] in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "You first learn about the crime in [Novel Title] in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The initial mention of the crime in [Novel Title] takes place in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "The initial mention of the crime in [Novel Title] takes place in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             }
         ]
         self.perpetratorAnswerTemplates = [
             {
-                "template": "The perpetrator is first mentioned in [Novel Title] in Chapter [Chapter Number], sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
+                "template": "The perpetrator [Perpetrator Name] is first mentioned in [Novel Title] in [Chapter Number], sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Perpetrator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "In Chapter [Chapter Number] of [Novel Title], the perpetrator is first introduced in sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
+                "template": "In [Chapter Number] of [Novel Title], the perpetrator [Perpetrator Name] is first introduced in sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Perpetrator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "You first encounter the perpetrator in Chapter [Chapter Number] of [Novel Title], specifically in sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
+                "template": "You first encounter the perpetrator [Perpetrator Name] in [Chapter Number] of [Novel Title], specifically in sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Perpetrator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The initial mention of the perpetrator in [Novel Title] occurs in Chapter [Chapter Number], sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
+                "template": "The initial mention of the perpetrator [Perpetrator Name] in [Novel Title] occurs in [Chapter Number], sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Perpetrator Name", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The perpetrator makes their first appearance in [Novel Title] in Chapter [Chapter Number], sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
+                "template": "The perpetrator [Perpetrator Name] makes their first appearance in [Novel Title] in [Chapter Number], sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Perpetrator Name", "Chapter Number", "Sentence Number"]
             }
         ]
         self.perpetratorSurroundingAnswerTemplates = [
@@ -99,45 +99,45 @@ class ChatRegex:
         ]
         self.togetherAnswerTemplates = [
             {
-                "template": "In the novel [Novel Title], the investigator [Investigator Name] and perpetrator [Perpetrator Name] first appear together in Chapter [Chapter Number], sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Investigator Name", "Perpetrator Name", "Chapter Number", "Sentence Number"]
+                "template": "In the novel [Novel Title], the investigator and perpetrator first appear together in [Chapter Number], sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "You first encounter the investigator [Investigator Name] and perpetrator [Perpetrator Name] together in Chapter [Chapter Number], sentence number [Sentence Number].\n",
-                "variables": ["Novel Title", "Investigator Name", "Perpetrator Name", "Chapter Number", "Sentence Number"]
+                "template": "You first encounter the investigator and perpetrator together in [Chapter Number], sentence number [Sentence Number].\n",
+                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The investigator [Investigator Name] and the perpetrator [Perpetrator Name] make their initial appearance together in Chapter [Chapter Number], specifically in sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Investigator Name", "Perpetrator Name", "Chapter Number", "Sentence Number"]
+                "template": "The investigator and the perpetrator make their initial appearance together in [Chapter Number], specifically in sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "In [Novel Title], the investigator [Investigator Name] and perpetrator [Perpetrator Name] are introduced together for the first time in Chapter [Chapter Number], sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Investigator Name", "Perpetrator Name", "Chapter Number", "Sentence Number"]
+                "template": "In [Novel Title], the investigator and perpetrator are introduced together for the first time in [Chapter Number], sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The first appearance of the investigator [Investigator Name] and perpetrator [Perpetrator Name] together takes place in Chapter [Chapter Number], sentence [Sentence Number].\n",
-                "variables": ["Novel Title", "Investigator Name", "Perpetrator Name", "Chapter Number", "Sentence Number"]
+                "template": "The first appearance of the investigator and perpetrator together takes place in [Chapter Number], sentence [Sentence Number].\n",
+                "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             }
         ]
         self.suspectsIntroducedAnswerTemplates = [
             {
-                "template": "Other suspects are first introduced in [Novel Title] in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "Other suspects are first introduced in [Novel Title] in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "In Chapter [Chapter Number] of [Novel Title], other suspects make their first appearance in sentence [Sentence Number].\n",
+                "template": "In [Chapter Number] of [Novel Title], other suspects make their first appearance in sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "You first encounter other suspects in Chapter [Chapter Number] of [Novel Title], specifically in sentence [Sentence Number].\n",
+                "template": "You first encounter other suspects in [Chapter Number] of [Novel Title], specifically in sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "The initial introduction of other suspects in [Novel Title] occurs in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "The initial introduction of other suspects in [Novel Title] occurs in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             },
             {
-                "template": "Other suspects make their first appearance in [Novel Title] in Chapter [Chapter Number], sentence [Sentence Number].\n",
+                "template": "Other suspects make their first appearance in [Novel Title] in [Chapter Number], sentence [Sentence Number].\n",
                 "variables": ["Novel Title", "Chapter Number", "Sentence Number"]
             }
         ]
@@ -147,14 +147,12 @@ class ChatRegex:
         template = respArray[num]
         for variable in template["variables"]:
             if variable in values:
-                template["template"] = template["template"].replace(f"[{variable}]", str(values[variable]))
+                template["template"] = template["template"].replace(f"[{variable}]", (str(values[variable])))
             else:
                 print(f"Warning: Variable '{variable}' not found in values dictionary.")
         text = template["template"]
-        for char in text:
-            print(char, end='', flush=True)
-            time.sleep(0.05) 
         print()
+        print(text.strip('\r'))
 
     def spinningCursor(self):
         while True:
@@ -199,7 +197,9 @@ class ChatRegex:
     def processQuery(self, query, novel_selection):
         if novel_selection == '1':
             investigatorOne = r'\b(?:((Mr. )?Sherlock Holmes|(Mr. )?Sherlock|(Mr. )?Holmes))\b'
+            investigatorOneString = r'Stapleton turned a ghastly face upon us, but by a supreme effort he had overcome his amazement and his disappointment. He looked sharply from Holmes'
             investigatorTwo = r'\b(?:Dr\.)?\s?(?:John\s)?Watson\b'
+            investigatorTwoString = r'Dr. Watson,” said he as he came panting up to where I stood. “Here on the moor we are homely folk and do not wait for formal introductions. You may possibly have heard my name from our mutual friend, Mortimer. I am Stapleton'
             crime = r'\b(?:kill|killed|killing|manslaughter|assassination|execution|annihilation|liquidation|slaughter|butchery|termination|carnage|death|demise|extermination|murder)\b'
             perpetrator = r'\b(?:(John |Mr. )?Stapleton|Rodger( Baskerville)?)\b'
             suspectRegexArray = [
@@ -215,8 +215,9 @@ class ChatRegex:
             ]
         elif novel_selection == '2':
             investigatorOne = r'\b(?:(Mr.)?(Tommy|Thomas)( Beresford)?)\b'
+            investigatorOneString = r'Sir James arrived punctually at eight o’clock, and Julius introduced Tommy. Sir James shook hands with him warmly.'
             investigatorTwo = r'\b(?:(Miss )?Prudence( Cowley)?|(Miss )?Tuppence)\b'
-            #(the )?Young Adventurers(, Ltd.)?|
+            investigatorTwoString = r'Brown. You can go.” The clerk withdrew, closing the door behind him. Whittington turned to Tuppence'
             crime = r'\b(?:Labour Unrest|Revolution(s)?|(Labour )?coup?)\b'
             perpetrator = r'\b(?:(Mr. )?Brown|(Sir )?James( Peel Edgerton)?)\b'
             suspectRegexArray = [
@@ -226,12 +227,15 @@ class ChatRegex:
             ]
         elif novel_selection == '3':
             investigatorOne = r'\b(?:(Monsieur |Hercule )?Poirot)\b'
+            investigatorOneString = r'Poirot pronounced his name. “Mr. Inglethorp,” said Poirot, addressing him directly, “a very dark shadow is resting on this house—the shadow of murder.” Inglethorp shook his head sadly. “My poor wife,” he murmured. “Poor Emily! It is terrible.” “I do not think, monsieur,” said Poirot'
             investigatorTwo = "FALSE"
-            crime = r'\b(?:(strychnine )?(poisoned|poisoning)?|(Wilful )?Murder(ing|ed)?|Killed)\b'
+            crime = r'\b(?:(strychnine )?(poisoned|poisoning)?|(Wilful )?Murder(ing|ed)?|Killed|The Styles Case)\b'
             perpetrator = r'\b(?:Mr. Alfred Inglethorp|Alfred Inglethorp|Alfred|Mr. Inglethorp|Miss Howard|Evelyn( Howard)?)\b'
-            suspect1 = r'\b(?:(Mr.( John)?|John|(Mrs. )?Lawrence) Cavendish|Cavendishes)\b'
-            suspect2 = r'\b(?:(Miss|Evelyn) Howard|Evelyn)\b'
-            suspect3 = r'\b(?:Mrs. Raikes)\b'
+            suspectRegexArray = [
+                r'\b(?:(Mr.( John)?|John|(Mrs. )?Lawrence) Cavendish|Cavendishes)\b',
+                r'\b(?:(Miss|Evelyn) Howard|Evelyn)\b',
+                r'\b(?:Mrs. Raikes)\b'
+            ]
 
         q1 = r'^(?=.*\bwhen\b)(?=.*\b(investigator(s)?|pair|duo|partner(s)?|detective(s)?)\b)(?=.*\bfirst\b)(?=.*\b(mention(ed)?|appear(s)?|occur(s)?|show(s)? up|shown|introduce(d)?|arrive(s)?)\b)'
         q2 = r'^(?=.*\bwhen\b)(?=.*\b(crime(s)?|theft(s)?|burglary|burglaries|murder(s)?|attack(s)?)\b)(?=.*\bfirst\b)(?=.*\b(mention(ed)?|appear(s)?|occur(s)?|show(s)? up|shown|introduce(d)?|arrive(s)?|happen(s)?)\b)'
@@ -241,26 +245,20 @@ class ChatRegex:
         q6 = r'^(?=.*\bwhen\b)(?=.*\b(suspect(s)?|accused|defendant(s)?)\b)(?=.*\bfirst\b)(?=.*\b(mention(ed)?|appear(s)?|occur(s)?|show(s)? up|shown|introduce(d)?|arrive(s)?)\b)'
 
         if re.search(q1, query, re.IGNORECASE):
-            #print("When does the investigator (or a pair) occur for the first time -  chapter #, the sentence(s) # in a chapter")
             self.investigatorDetect(investigatorOne, novel_selection)
             if investigatorTwo != "FALSE":
                 self.investigatorDetect(investigatorTwo, novel_selection)
         elif re.search(q2, query, re.IGNORECASE):
-            #print("When is the crime first mentioned - the type of the crime and the details -  chapter #, the sentence(s) # in a chapter")
             self.crimeDetect(crime, novel_selection)
         elif re.search(q3, query, re.IGNORECASE):
-            #print("When is the perpetrator first mentioned - chapter #, the sentence(s) # in a chapter")
             self.perpetratorDetect(perpetrator, novel_selection)
         elif re.search(q4, query, re.IGNORECASE):
-            #print("What are the three words that occur around the perpetrator on each mention (i.e., the three words preceding and the three words following the mention of a perpetrator)")
-            self.perpetratorSurrounding(perpetrator)
+           self.perpetratorSurrounding(perpetrator)
         elif re.search(q5, query, re.IGNORECASE):
-            #print("When and how the detective/detectives and the perpetrators co-occur - chapter #, the sentence(s) # in a chapter")
-            self.togetherDetect(investigatorOne, perpetrator, novel_selection)
-            #if investigatorTwo != "FALSE":
-            #    self.togetherDetect(investigatorTwo, perpetrator, novel_selection)
+            self.togetherDetect(investigatorOneString)
+            if investigatorTwo != "FALSE":
+                self.togetherDetect(investigatorTwoString)
         elif re.search(q6, query, re.IGNORECASE):
-            #print("When are other suspects first introduced - chapter #, the sentence(s) # in a chapter")
             self.suspectDetect(suspectRegexArray, novel_selection)
         else:
             print("I am unable to answer that question")
@@ -274,15 +272,16 @@ class ChatRegex:
             if match:
                 matches = re.finditer(investigator, content)
                 for match in matches:
-                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?](\s|\”|\"|$)'
                     punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
-                    num_punctuation = len(punctuation_matches)
+                    num_punctuation = len(punctuation_matches) + 1
                     values = {
-                        "Novel Title": self.novelName.get(str(novel_selection)),
+                        "Novel Title": self.novelName.get(str(novel_selection)).replace("\r", ""),
                         "Investigator Name": match.group(),
-                        "Chapter Number": chapter['chapterName'],
-                        "Sentence Number": num_punctuation + 1
+                        "Chapter Number": chapter['chapterName'].replace("\r", ""),
+                        "Sentence Number": num_punctuation
                     }
+                    time.sleep(0.4) 
                     self.generateAnswer(self.detectiveAnswerTemplates, values)
                     return
 
@@ -293,16 +292,13 @@ class ChatRegex:
             if match:
                 matches = re.finditer(crime, content)
                 for match in matches:
-                    punctuation_pattern = r'(\n)'
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?](\s|\”|\"|$)'
                     punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
-                    num_punctuation = len(punctuation_matches)
-                    # print(match.group(), "First mentioned in: ")
-                    # print("Chapter-", count)
-                    # print("Sentence-", num_punctuation + 1)
+                    num_punctuation = len(punctuation_matches) + 1
                     value = {
                         "Novel Title": self.novelName[str(novel_selected)].replace("\r", ""), 
                         "Chapter Number": chapter['chapterName'].replace("\r", ""), 
-                        "Sentence Number": num_punctuation + 1
+                        "Sentence Number": num_punctuation
                     }
                     self.generateAnswer(self.crimeAnswerTemplates, value)
                     return
@@ -310,17 +306,18 @@ class ChatRegex:
     def perpetratorDetect(self, perpetrator, novel_selection):
         for chapter in self.chapters:
             content = str(chapter['chapterContent'])
-            match = re.search(perpetrator, content)
-            if match:
+            matched = re.search(perpetrator, content)
+            if matched:
                 matches = re.finditer(perpetrator, content)
                 for match in matches:
-                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?](\s|\”|\"|$)'
                     punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
-                    num_punctuation = len(punctuation_matches)
+                    num_punctuation = len(punctuation_matches) + 1
                     values = {
-                        "Novel Title": self.novelName[str(novel_selection)], 
+                        "Novel Title": self.novelName[str(novel_selection)].replace("\r", ""), 
+                        "Perpetrator Name": match.group(),
                         "Chapter Number": chapter['chapterName'].replace("\r", ""), 
-                        "Sentence Number": num_punctuation + 1
+                        "Sentence Number": num_punctuation
                     }
                     self.generateAnswer(self.perpetratorAnswerTemplates, values)
                     return
@@ -349,57 +346,45 @@ class ChatRegex:
             print("Mention", count, "- 3 words after: ", words_after)
             print()
 
-    def togetherDetect(self, investigator, perpetrator, novel_selection):
+    def togetherDetect(self, investigatorString):
         for chapter in self.chapters:
-            content = str(chapter['chapterContent'])
-            investigator_match = re.search(investigator, content)
-            perpetrator_match = re.search(perpetrator, content)
-            if investigator_match and perpetrator_match:
-                #print("\n", chapter['chapterName'], "\n")
-                investigator_matches = re.finditer(investigator, content)
-                perpetrator_matches = re.finditer(perpetrator, content)
-                for inv_match in investigator_matches:
-                    for perp_match in perpetrator_matches:
-                        #print("Investigator start: ", inv_match.start(), "Investigator end: ", inv_match.end())
-                        #print("Perpetrator start: ", perp_match.start(), "Perpetrator end: ", perp_match.end())
-                        if((inv_match.end() <= perp_match.start() <= (inv_match.end() + 200)) | (perp_match.end() <= inv_match.start() <= (perp_match.end() + 200))):
-                            if(inv_match.start() < perp_match.start()):
-                                block_regex = r'(?<=[.?!])[a-zA-Z0-9-\s@#%^&*()_+\-=[\]{}|;\':"“”,\/<>~`]*' + str(chapter['chapterContent'])[inv_match.start():perp_match.end()] + r'[a-zA-Z0-9-\s@#%^&*()_+\-=[\]{}|;\':"“”,\/<>~`]*[.?!]'
-                                block_match = re.search(block_regex, content)
-                                #print(block_match.group())
-                            else:
-                                block_regex = r'(?<=[.?!])[a-zA-Z0-9-\s@#%^&*()_+\-=[\]{}|;\':"“”,\/<>~`]*' + str(chapter['chapterContent'])[perp_match.start():inv_match.end()] + r'[a-zA-Z0-9-\s@#%^&*()_+\-=[\]{}|;\':"“”,\/<>~`]*[.?!]'
-                                block_match = re.search(block_regex, content)
-                                #print(block_match.group())
-                            punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
-                            punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:max(inv_match.end(), perp_match.end())])
-                            num_punctuation = len(punctuation_matches)
-                            values = {
-                                "Novel Title": self.novelName[str(novel_selection)], 
-                                "Investigator Name": inv_match.group(),
-                                "Perpetrator Name": perp_match.group(),
-                                "Chapter Number": chapter['chapterName'].replace("\r", ""), 
-                                "Sentence Number": num_punctuation + 1
-                            }
-                            self.generateAnswer(self.togetherAnswerTemplates, values)
-                            return
-                        #print("End of Perp")
-                    perpetrator_matches = re.finditer(perpetrator, content)
-                    #print("End of Inv")
-
+            content = re.sub(r'\s+', ' ', str(chapter['chapterContent']))
+            match = re.search(investigatorString, content)
+            if match:
+                block_regex = r'(?<=[.?!])[a-zA-Z0-9-\s@#%^&*()_+\-=[\]{}|;\':"“”,\/<>~`]*' + content[match.start():match.end()] + r'[a-zA-Z0-9-\s@#%^&*()_+\-=[\]{}|;\':"“”,\/<>~`]*[.?!]'
+                block_match = re.search(block_regex, content)
+                punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?](\s|\”|\"|$)'
+                punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
+                num_punctuation = len(punctuation_matches) + 1
+                values = {
+                        "Novel Title": self.novelName[str(novel_selection)].replace("\r", ""), 
+                        "Chapter Number": chapter['chapterName'].replace("\r", ""), 
+                        "Sentence Number": num_punctuation
+                }
+                self.generateAnswer(self.togetherAnswerTemplates, values)
+                print("This is the context in which they meet: ")
+                if(block_match):
+                    print(block_match.group())
+                else:
+                    print(investigatorString)
+                return
+                            
     def suspectDetect(self, suspectRegexArray, novel_selection):
         for suspect in suspectRegexArray:
             for chapter in self.chapters:
                 content = str(chapter['chapterContent'])
                 match = re.search(suspect, content)
                 if match:
-                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?]( |\n|\”|\"|$)'
+                    punctuation_pattern = r'(?<!Mr|Ms|Mr|Dr)(?<!Mrs)[.!?](\s|\”|\"|$)'
                     punctuation_matches = re.findall(punctuation_pattern, str(chapter['chapterContent'])[:match.end()])
-                    num_punctuation = len(punctuation_matches)
-                    print(f"{match.group()} First mentioned in:")
-                    print(f"Chapter - {chapter['chapterName'].strip()}")
-                    print(f"Sentence - {num_punctuation + 1}")
+                    num_punctuation = len(punctuation_matches) + 1
+                    print()
+                    print(f"{match.group()} is first mentioned in:")
+                    chaptername = chapter['chapterName'].replace('\r', '')
+                    print(f"   Chapter - {chaptername}")
+                    print(f"   Sentence - {num_punctuation}")
                     break
+        print()
 
     def run(self, novel_selection):
         while self.processRun:
